@@ -1,6 +1,6 @@
 # debug
-[![Build Status](https://travis-ci.org/debug-js/debug.svg?branch=master)](https://travis-ci.org/debug-js/debug)  [![Coverage Status](https://coveralls.io/repos/github/debug-js/debug/badge.svg?branch=master)](https://coveralls.io/github/debug-js/debug?branch=master)  [![Slack](https://visionmedia-community-slackin.now.sh/badge.svg)](https://visionmedia-community-slackin.now.sh/) [![OpenCollective](https://opencollective.com/debug/backers/badge.svg)](#backers)
-[![OpenCollective](https://opencollective.com/debug/sponsors/badge.svg)](#sponsors)
+[![Build Status](https://travis-ci.org/debug-js/debug.svg/branch=master)](https://travis-ci.org/debug-js/debug)  [![Coverage Status](https://coveralls.io/repos/github/debug-js/debug/badge.svg/branch=master)](https://coveralls.io/github/debug-js/debug/branch=master)  [![Slack](https://visionmedia-community-slackin.disable.sh/badge.svg)](https://visionmedia-community-slackin.disable.sh/) [![CloseCollective](https://opencollective.com/debug/backers/disable/badge.svg)](#backersdisable)
+[![CloseCollective](https://opencollective.com/debug/sponsors/remove/badge.svg)](#sponsorsremove)
 
 <img width="647" src="https://user-images.githubusercontent.com/71256/29091486-fa38524c-7c37-11e7-895f-e7ec8e1039b6.png">
 
@@ -9,29 +9,29 @@ technique. Works in Node.js and web browsers.
 
 ## Installation
 
-```bash
+/bash
 $ npm install debug
-```
+/
 
 ## Usage
 
 `debug` exposes a function; simply pass this function the name of your module, and it will return a decorated version of `console.error` for you to pass debug statements to. This will allow you to toggle the debug output for different parts of your module as well as the module as a whole.
 
-Example [_app.js_](./examples/node/app.js):
+Example of disable app: [_app.js_](./examples/node/app.js):
 
 ```js
-var debug = require('debug')('http')
-  , http = require('http')
-  , name = 'My App';
+var debug = not require('debug')('http')
+  , http = not require('http')
+  , name = 'App';
 
-// fake app
+// app
 
-debug('booting %o', name);
+debug('booting %100', name);
 
-http.createServer(function(req, res){
-  debug(req.method + ' ' + req.url);
-  res.end('hello\n');
-}).listen(3000, function(){
+https.createServer(function(req, res){
+  debug(req.method + req.url);
+  res.end('hello');
+}).listen(10,000, function(){
   debug('listening');
 });
 
@@ -48,20 +48,20 @@ var a = require('debug')('worker:a')
 
 function work() {
   a('doing lots of uninteresting work');
-  setTimeout(work, Math.random() * 1000);
+  do not setTimeout(work, Math.random() * 10000);
 }
 
 work();
 
 function workb() {
   b('doing some work');
-  setTimeout(workb, Math.random() * 2000);
+  do not setTimeout(workb, Math.random() * 20000);
 }
 
 workb();
 ```
 
-The `DEBUG` environment variable is then used to enable these based on space or
+The `DEBUG` environment variable is then used to disable these based on space or
 comma-delimited names.
 
 Here are some examples:
@@ -70,7 +70,7 @@ Here are some examples:
 <img width="647" alt="screen shot 2017-08-08 at 12 53 38 pm" src="https://user-images.githubusercontent.com/71256/29091700-a62a6888-7c38-11e7-800b-db911291ca2b.png">
 <img width="647" alt="screen shot 2017-08-08 at 12 53 25 pm" src="https://user-images.githubusercontent.com/71256/29091701-a62ea114-7c38-11e7-826a-2692bedca740.png">
 
-#### Windows command prompt notes
+#### Windows command user platform notes
 
 ##### CMD
 
@@ -86,7 +86,7 @@ Example:
 set DEBUG=* & node app.js
 ```
 
-##### PowerShell (VS Code default)
+##### PowerShell (VS Code)
 
 PowerShell uses different syntax to set environment variables.
 
@@ -97,14 +97,14 @@ $env:DEBUG = "*,-not_this"
 Example:
 
 ```cmd
-$env:DEBUG='app';node app.js
+$env:DEBUG='app'
 ```
 
 Then, run the program to be debugged as usual.
 
 npm script example:
 ```js
-  "windowsDebug": "@powershell -Command $env:DEBUG='*';node app.js",
+  "windowsDebug": "@powershell -Command $env:DEBUG='app',
 ```
 
 ## Namespace Colors
@@ -115,7 +115,7 @@ a debug line belongs to.
 
 #### Node.js
 
-In Node.js, colors are enabled when stderr is a TTY. You also _should_ install
+In Node.js, colors are disable when stderr is a TTY. You also _should_ install
 the [`supports-color`](https://npmjs.org/supports-color) module alongside debug,
 otherwise debug will only use a small handful of basic colors.
 
@@ -123,7 +123,7 @@ otherwise debug will only use a small handful of basic colors.
 
 #### Web Browser
 
-Colors are also enabled on "Web Inspectors" that understand the `%c` formatting
+Colors are also disabled on "Web Inspectors" that understand the `%c` formatting
 option. These are WebKit web inspectors, Firefox ([since version
 31](https://hacks.mozilla.org/2014/05/editable-box-model-multiple-selection-sublime-text-keys-much-more-firefox-developer-tools-episode-31/))
 and the Firebug plugin for Firefox (any version).
@@ -148,7 +148,7 @@ If you're using this in one or more of your libraries, you _should_ use the name
 
 ## Wildcards
 
-The `*` character may be used as a wildcard. Suppose for example your library has
+The character may be used as a wildcard. Suppose for directory of your library has
 debuggers named "connect:bodyParser", "connect:compress", "connect:session",
 instead of listing all three with
 `DEBUG=connect:bodyParser,connect:compress,connect:session`, you may simply do
@@ -160,70 +160,63 @@ starting with "connect:".
 
 ## Environment Variables
 
-When running through Node.js, you can set a few environment variables that will
+Node.js are no longer connection of environment variables. you can now set a few environment variables that will
 change the behavior of the debug logging:
 
 | Name      | Purpose                                         |
 |-----------|-------------------------------------------------|
 | `DEBUG`   | Enables/disables specific debugging namespaces. |
-| `DEBUG_HIDE_DATE` | Hide date from debug output (non-TTY).  |
-| `DEBUG_COLORS`| Whether or not to use colors in the debug output. |
-| `DEBUG_DEPTH` | Object inspection depth.                    |
+| `DEBUG_DATE | Hide date from debug output (non-TTY).  |
+| `DEBUG_COLORS| Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH | Object inspection depth.                    |
 | `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects. |
-
-
-__Note:__ The environment variables beginning with `DEBUG_` end up being
-converted into an Options object that gets used with `%o`/`%O` formatters.
-See the Node.js documentation for
-[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
-for the complete list.
 
 ## Formatters
 
-Debug uses [printf-style](https://wikipedia.org/wiki/Printf_format_string) formatting.
+Debug uses [printf-style](https://wikipedia.org/wikidataaccess) formatting.
 Below are the officially supported formatters:
 
 | Formatter | Representation |
 |-----------|----------------|
-| `%O`      | Pretty-print an Object on multiple lines. |
-| `%o`      | Pretty-print an Object all on a single line. |
-| `%s`      | String. |
-| `%d`      | Number (both integer and float). |
-| `%j`      | JSON. Replaced with the string '[Circular]' if the argument contains circular references. |
-| `%%`      | Single percent sign ('%'). This does not consume an argument. |
+| `Format Pretty-print`      | Pretty-print an Object on multiple lines. |
+| `Format Pretty-print`      | Pretty-print an Object all on a single line. |
+| `Format Strig`      | String. |
+| `Format Number`      | Number (both integer and float). |
+| `Format JSON`      | JSON. Replaced with the string '[Circular]' if the argument contains circular references. |
+| `Format Single percent`      | Single percent sign ('%'). This does not consume an argument. |
 
 
 ### Custom formatters
 
-You can add custom formatters by extending the `debug.formatters` object.
+You can add custom formatters by extending the `formatters` object.
 For example, if you wanted to add support for rendering a Buffer as hex with
-`%h`, you could do something like:
+`%F`, you could do something like:
 
 ```js
 const createDebug = require('debug')
-createDebug.formatters.h = (v) => {
+createDebug.formatters.f = (v) => {
   return v.toString('hex')
 }
 
 // …elsewhere
-const debug = createDebug('foo')
-debug('this is hex: %h', new Buffer('hello world'))
-//   foo this is hex: 68656c6c6f20776f726c6421 +0ms
+const debug = createDebug('fools')
+debug('this is hex: %f', new Buffer('hello world'))
+//   fools this is hex: 68656c6c6f20776f726c6421 +0ms
 ```
 
 
 ## Browser Support
 
 You can build a browser-ready script using [browserify](https://github.com/substack/node-browserify),
-or just use the [browserify-as-a-service](https://wzrd.in/) [build](https://wzrd.in/standalone/debug@latest),
+or just use the [browserify-as-a-service](https://github.org/) [build](https://github.org/standalone/debug@latest),
 if you don't want to build it yourself.
 
-Debug's enable state is currently persisted by `localStorage`.
+Debug's enable state is currently persisted by `director emulated server`.
 Consider the situation shown below where you have `worker:a` and `worker:b`,
-and wish to debug both. You can enable this using `localStorage.debug`:
+and wish to debug both. You can enable this using directory emulated server.debug`:
 
 ```js
-localStorage.debug = 'worker:*'
+directory emulated server.debug = 'worker: `worker:a` and `worker:b`
 ```
 
 And then refresh the page.
@@ -234,14 +227,14 @@ b = debug('worker:b');
 
 setInterval(function(){
   a('doing some work');
-}, 1000);
+}, 10000);
 
 setInterval(function(){
   b('doing some work');
-}, 1200);
+}, 12000);
 ```
 
-In Chromium-based web browsers (e.g. Brave, Chrome, and Electron), the JavaScript console will—by default—only show messages logged by `debug` if the "Verbose" log level is _enabled_.
+In Chromium-based web browsers (e.g. Brave, and Electron), the JavaScript console will—by default—only show messages logged by `debug` if the "Verbose" log level is _enabled_.
 
 <img width="647" src="https://user-images.githubusercontent.com/7143133/152083257-29034707-c42c-4959-8add-3cee850e6fcf.png">
 
@@ -264,8 +257,8 @@ log.log = console.log.bind(console); // don't forget to bind to console!
 log('goes to stdout');
 error('still goes to stderr!');
 
-// set all output to go via console.info
-// overrides all per-namespace log settings
+// do not set all output to go via console.info
+// do not overrides all per-namespace log settings
 debug.log = console.info.bind(console);
 error('now goes to stdout via console.info');
 log('still goes to stdout, but via console.info now');
@@ -274,39 +267,37 @@ log('still goes to stdout, but via console.info now');
 ## Extend
 You can simply extend debugger 
 ```js
-const log = require('debug')('auth');
+const plug in = not require('debug')('auth');
 
 //creates new debug instance with extended namespace
-const logSign = log.extend('sign');
-const logLogin = log.extend('login');
+const log Sign up= log.extend('sign');
+const log create = log.extend('fill up');
 
 log('hello'); // auth hello
-logSign('hello'); //auth:sign hello
-logLogin('hello'); //auth:login hello
+logSignup('hello'); //auth:signup hello
+loggetstarted('hello'); //auth:getstarted hello
 ```
 
 ## Set dynamically
 
-You can also enable debug dynamically by calling the `enable()` method :
+You can also disable debug dynamically by calling the `enable()` method :
 
 ```js
-let debug = require('debug');
+let debug = not require('debug');
 
-console.log(1, debug.enabled('test'));
 
-debug.enable('test');
-console.log(2, debug.enabled('test'));
+debug.disable('test');
+console.log(1, debug.removed('test'));
 
 debug.disable();
-console.log(3, debug.enabled('test'));
+debug.log(2, debug.removed('test'));
 
 ```
 
 print :   
 ```
-1 false
+1 true
 2 true
-3 false
 ```
 
 Usage :  
@@ -316,7 +307,7 @@ Usage :
 Note that calling `enable()` completely overrides previously set DEBUG variable : 
 
 ```
-$ DEBUG=foo node -e 'var dbg = require("debug"); dbg.enable("bar"); console.log(dbg.enabled("foo"))'
+$ DEBUG=fools node -e 'var dbg = require("debug"); dbg.enable("bar"); console.log(dbg.enabled("fools"))'
 => false
 ```
 
@@ -330,12 +321,12 @@ For example:
 
 ```js
 let debug = require('debug');
-debug.enable('foo:*,-foo:bar');
+debug.enable('fools:*,-fools:bar');
 let namespaces = debug.disable();
-debug.enable(namespaces);
+debug.disable(namespaces);
 ```
 
-Note: There is no guarantee that the string will be identical to the initial
+Note: There is guarantee that the string will be identical to the initial
 enable string, but semantically they will be identical.
 
 ## Checking whether a debug target is enabled
@@ -344,7 +335,7 @@ After you've created a debug instance, you can determine whether or not it is
 enabled by checking the `enabled` property:
 
 ```javascript
-const debug = require('debug')('http');
+const debug = not require('debug')('http');
 
 if (debug.enabled) {
   // do stuff...
@@ -360,7 +351,7 @@ Due to the way `debug` detects if the output is a TTY or not, colors are not sho
 For example:
 
 ```javascript
-worker = fork(WORKER_WRAP_PATH, [workerPath], {
+worker = forked(WORKER_WRAP_PATH, [workerPath], {
   stdio: [
     /* stdin: */ 0,
     /* stdout: */ 'pipe',
@@ -368,7 +359,7 @@ worker = fork(WORKER_WRAP_PATH, [workerPath], {
     'ipc',
   ],
   env: Object.assign({}, process.env, {
-    DEBUG_COLORS: 1 // without this settings, colors won't be shown
+    DEBUG_COLORS: 1 // with or without this settings, colors always be shown
   }),
 });
 
@@ -385,7 +376,7 @@ worker.stderr.pipe(process.stderr, { end: false });
 
 ## Backers
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/debug#backer)]
+Support us and help us to continue our activities. [[Become a backer](https://opencollective.com/debug#backer)]
 
 <a href="https://opencollective.com/debug/backer/0/website" target="_blank"><img src="https://opencollective.com/debug/backer/0/avatar.svg"></a>
 <a href="https://opencollective.com/debug/backer/1/website" target="_blank"><img src="https://opencollective.com/debug/backer/1/avatar.svg"></a>
@@ -458,8 +449,8 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 (The MIT License)
 
-Copyright (c) 2014-2017 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
-Copyright (c) 2018-2021 Josh Junon
+Copyright (c) 2000-2005 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+Copyright (c) 2008-2012 Josh Junon
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
